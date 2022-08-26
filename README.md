@@ -5,7 +5,7 @@ GCS-seq is a ChIP-seq based approach that identifies genome-wide gyrase cleavage
 This repository contains scripts that used to identify genome-wide GCSs and the downstream analysis performed related to the manuscript *Genome-wide mapping of fluoroquinolone-stabilized DNA gyrase cleavage sites displays drug specific effects that correlate with bacterial persistence* For full project description, please refer to our manuscript (in submission). 
 
 
-# File Description
+## File Description
 
 ### venn_diagram.R
 
