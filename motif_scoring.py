@@ -1,7 +1,7 @@
 #motif scoring function
 # 2019, Author:Cathy Tang
 # 2022 updated
-# The script is used to scan log-odds socre of a given seqence or acrross the genome to predict cleavage probability 
+# The script is used to scan log-odds score of a given seqence or acrross the genome to predict cleavage probability 
 
 import os
 import numpy as np
