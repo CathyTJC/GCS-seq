@@ -63,24 +63,6 @@ ggsave("Persistence_GCS_num.pdf", units="in", lm_sum, width=7, height=3.5, dpi=1
 
 fit1 <- lm(log(Survival_Fraction)~ strength_sum, data=df1)
 summary(fit1) 
-AIC(fit1) 
-BIC(fit1) 
-
-
-
-# bar plot of nubmer of GCS ----------------------------------------------------
-p2<-ggplot(df1, aes(x=Treatment, y=GCS_num)) +
-  geom_segment(aes(x=Treatment, xend=Treatment, y=0, yend=GCS_num), color="skyblue") +
-  geom_point(color="blue", size=4, alpha=0.6) +
-  theme_light() +
-  coord_flip() +
-  theme_classic()+
-  xlab('')+
-  theme(text = element_text(size = 14)) +  
-  expand_limits(y = c(0, 15000))+
-  ylab('Number of distinct GCSs')
-
-ggsave("GCS_persistance_bar.pdf",p2,width=4, height=3, units = "in", dpi = 600)
 
 
 
