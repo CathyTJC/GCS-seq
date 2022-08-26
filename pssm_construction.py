@@ -107,7 +107,7 @@ def wrap_motif_construct(Source_genome_path,GCSs_files_paths, weight,path_out):
     return seqs,pwm, m
 
 #Input: GCS input
-pwd = '/Volumes/TJC/GCS_calling_files/HF_GCS_strength_0408/'
+pwd = '/data/GCS_calling/GCS_extended_version/'
 GCSs_input={'MOXI': pwd+"MOXI.txt",'LEVO': pwd+"LEVO.txt", 'NOR': pwd+ "NOR.txt",'CIP': pwd+"CIP.txt",
            'GEMI': pwd+"GEMI.txt"}
 #Input: path to the mapping genome FASTA.
