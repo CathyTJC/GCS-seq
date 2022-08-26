@@ -18,14 +18,22 @@ readAnnotaion <- function(AnnotationPath =.anoPath,col_to_select=.colselect ){
 
 ## read in GCS and cleavage strength data 
 # note 1 GCS has outlier strength already removed
-readGCSStrength <- function(GCSPath = .gcspath, drug,suffix = .suffix){
+readGCSStrength <- function(GCSPath = .gcspath, drug,suffix = .suffix,move_first=TRUE,col_to_select=FALSE){
   file_path <- file.path(getwd(),GCSPath,paste0(drug,suffix))
-  df <- read.table(file_path,sep = ',',header = TRUE)%>%
-    select(-X) #remove first column (no info in the first column)
+  if (move_first==TRUE){
+    df <- read.table(file_path,sep = ',',header = TRUE)%>%
+      select(-X) #remove first column (no info in the first column)
+  }
+  else{
+    df <- read.table(file_path,sep = ',',header = TRUE)
+  }
+  if (col_to_select !=FALSE){
+    df <-df[,col_to_select]
+  }
   return(df)
 }
 
-## get counts from NRA-seq for each timepoint and drug for each replicates(3 total)
+## get counts from RNA-seq for each time point and drug for each replicates(3 total)
 getRNAseqcounts <- function(RNAseqPath=.RNAseqpath,condition,drug){
   file_path <- file.path(getwd(),RNAseqPath,condition,drug)
   dfFiles =list.files(file_path, pattern = '.txt',full.names =TRUE)
@@ -113,11 +121,13 @@ add_ano<-function(GCS,muori_ref){
 
 
 ## read all txt files at a directory
-readfile<- function(inputPath = .path, pattern = '.txt'){
+readfile<- function(inputPath = .path, pattern = '.txt',row_names = TRUE){
   file_path <- file.path(getwd(),inputPath )
   dfFiles =list.files(file_path, pattern = pattern,full.names =TRUE)
   if (!is.null(dfFiles)){
-    ldf <- lapply(dfFiles, read.table,row.names = 1) 
+    if (row_names == TRUE){
+      ldf <- lapply(dfFiles, read.table,row.names = 1) }
+    else{ldf <- lapply(dfFiles, read.table)}
     full_name <- list.files(file_path, pattern = pattern)
     ls_name <- gsub(pattern, '',full_name )
     names(ldf) <- ls_name
