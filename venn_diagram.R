@@ -10,8 +10,7 @@ library(ggpmisc)
 library(ggpubr)
 
 # read in GCSs
-setwd("/Volumes/TJC/GCS_calling_files")
-dataDir <- "HF_GCS_strength_0408/"
+dataDir ='/data/GCS_calling/GCS_extended_version/'
 dfFiles <- dir(file.path(getwd(), dataDir), pattern="*.txt", full.name=T) #raw GCS files
 names(dfFiles) <- gsub(".txt","",basename(dfFiles))
 CIP <-read.table(file = dfFiles[1], sep = ',',header = TRUE)$pos
