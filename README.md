@@ -7,6 +7,13 @@ This repository contains scripts that used to identify genome-wide GCSs and the 
 
 ## File Description
 
+### GCS_calling.py 
+
+This scripts is used for the identification of GCSs.
+
+**Input** the folder contains the coverage data from NGS
+**Output** files containing GCSs
+
 ### venn_diagram.R
 
 Draw Venn diagram of identified GCSs from levofloxacin (LEVO), moxifloxacin (MOXI), norfloxacin (NOR), ciprofloxacin (CIP),and gemifloxacin (GEMI) treatment.
@@ -68,12 +75,6 @@ generate GCS hierarchical clustering heat map
 **Input**: merged csv containing the cleavage strength for each replicate across 5 FQ treatment 
 
 
-### GCS_calling.py 
-
-This scripts is used for the identification of GCSs.
-
-**Input** the folder contains the coverage data from NGS
-**Output** files containing GCSs
 
 ### DEseq.R
 This script performs differential gene expression analysis and saves the results
