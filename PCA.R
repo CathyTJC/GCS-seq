@@ -211,7 +211,7 @@ PCA_analysis<- function(pca){
 
 
 # Data input, PCA --------------------------------------------------------------
-# Read in merged csv containging the cleavage strength for each replicate across 5 FQ treatment 
+# Read in merged csv containing the cleavage strength for each replicate across 5 FQ treatment 
 
 dataDir ='data/GCS_calling/GCS_merge.csv'
 GCS_union<-read.csv(file = file.path(getwd(), dataDir),header = TRUE,row.names = 1) 
