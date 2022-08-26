@@ -135,7 +135,7 @@ def scan_score(pssm,sequence,Output_path,target_name,win_width_l=63, win_width_r
 
 
 #Input: GCS input (user defined)
-pwd = '/GCS_extended_version/'
+pwd = '/data/GCS_calling/GCS_extended_version/'
 GCSs_input={'LEVO': pwd+"LEVO.txt"}
 #Input: path to the mapping genome FASTA.
 fasta_path_input = "/Mu_ori_mu_insert_MG1655.fa"
