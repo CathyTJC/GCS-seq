@@ -17,7 +17,7 @@ library(gtools)
 precheck<-function (trans_enrich){
   # Plot covariation between between samples
   cov<-trans_enrich %>% 
-    ggplot(aes(LEVO_strength_rep1, LEVO_strength_rep2)) + geom_point() +
+    ggplot(aes(LEVO_rep1, LEVO_rep2)) + geom_point() +
     geom_abline(colour = "brown")+
     scale_x_log10()+
     scale_y_log10()
@@ -48,7 +48,7 @@ precheck<-function (trans_enrich){
   ## With the log transormed data, let's redo the above visualization
   # "gather" the counts data
   trans_cts_long <- log_enrich %>% 
-    pivot_longer(cols = MOXI_strength_rep1:NOR_strength_rep3, 
+    pivot_longer(cols = MOXI_rep1:NOR_rep3, 
                  names_to = "sample", 
                  values_to = "cts")
   
@@ -98,7 +98,7 @@ PCA<-function (df){
   pc_bplot<-pca$x %>% 
     # convert it to a tibble
     as_tibble(rownames = "sample") %>% 
-    separate(col = sample,into = c("Treatment", 'all',"rep"), sep = "_") 
+    separate(col = sample,into = c("Treatment", "rep"), sep = "_") 
   
   pc_bplot$Drug<- factor(pc_bplot$Treatment,levels = c('MOXI','LEVO','GEMI','CIP','NOR'))
   
@@ -213,20 +213,17 @@ PCA_analysis<- function(pca){
 # Data input, PCA --------------------------------------------------------------
 # Read in merged csv containing the cleavage strength for each replicate across 5 FQ treatment 
 
-dataDir ='data/GCS_calling/GCS_merge.csv'
-GCS_union<-read.csv(file = file.path(getwd(), dataDir),header = TRUE,row.names = 1) 
-GCS_union[is.na(GCS_union)] <- 0 #replace non gcs with 0 cleavage strength
+
+dataDir ='data/GCS_calling/GCS_merge_pseudo_strength.txt' # dataframe contains pseudo strengths, takes the union of all GCS
+GCS_union_rep<-read.csv(file = file.path(getwd(), dataDir),header = TRUE)
+pca<-PCA(GCS_union_rep)
+
 
 # dataDir ='data/GCS/PCA/GCS_merge_shared.csv'
 # GCS_shared <-read.csv(file = file.path(getwd(), dataDir),header = TRUE,row.names = 1) 
-
-# PCA 
-pca<-PCA(GCS_union)
-
 # #PCA of shared GCS
 # pca<-PCA(GCS_shared)
-# log_enrich<-precheck(GCS_shared)
-# pca2<-PCA(log_enrich)
+
 
 
 
