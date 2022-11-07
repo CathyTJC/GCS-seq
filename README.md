@@ -7,11 +7,14 @@ This repository contains scripts that used to identify genome-wide GCSs and the 
 
 ## File Description
 
+### coverage_read.py
+This scripts read in coverage file (processed from Galaxy, available upon request), preprocess, and prepare for GCS calling 
+
 ### GCS_calling.py 
 
 This scripts is used for the identification of GCSs.
 
-**Input** the folder contains the coverage data from NGS
+**Input** the folder contains the coverage data from NGS that preprocessed with coverage_read.py
 **Output** files containing GCSs
 
 ### venn_diagram.R
