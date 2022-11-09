@@ -1,5 +1,6 @@
 # author: Juechun Tang
-# 02-24-21
+# 02-24-21 updated
+## 10.2022 updated
 # construct motifs for MOXI, NOR, CIP, GEMI, and LEVO treated samples
 
 import os
@@ -12,7 +13,6 @@ import pandas as pd
 #######
 #FASTA sequences parsing.
 #######
-
 def obtain_seq(seq_path):
     seq_oi=open(seq_path, 'r')
     for record in SeqIO.parse(seq_oi, "fasta"):
@@ -21,10 +21,10 @@ def obtain_seq(seq_path):
     return sequence, record.id
 
 #######
-# High Fidelity GCSs data parsing, returns a dictionary of {GCS position:strength}
+# GCSs data parsing, returns a dictionary in the format of of {GCS position:strength}
+# take dicionary as input, user define name and input_path
 #######
-
-def GCSs_parsing(input_dict):
+def GCSs_parsing(input_dict,col_num):
     GCSs_sets_dict={}
     for k, v in input_dict.items():
         GCSs_dict={}
@@ -32,7 +32,7 @@ def GCSs_parsing(input_dict):
         for line in filein:
             line=line.rstrip().split(',')
             if line[0] not in ['pos']:
-                GCSs_dict[int(line[0])]=float(line[23])
+                GCSs_dict[int(line[0])]=float(line[col_num])
             else:
                 continue
         filein.close()
@@ -40,7 +40,7 @@ def GCSs_parsing(input_dict):
         print('Number of trusted GCSs for ' + str(k) + ' : ' + str(len(GCSs_dict)))
     return GCSs_sets_dict
 
-
+# strength normalization only used if we use a wegihted motif construction
 def strength_normalization (GCS_dict):
     GCS_norm_set_dict ={}
     for key, sub_dict in GCS_dict.items():
@@ -85,9 +85,10 @@ def motif_construct(GCSs_dict, genome, weight):
     print(m.consensus)
     return seqs,pwm, m
 
-def wrap_motif_construct(Source_genome_path,GCSs_files_paths, weight,path_out):
+
+def wrap_motif_construct(Source_genome_path,GCSs_files_paths, weight,path_out,col_num):
     Source_sequence=obtain_seq(Source_genome_path)[0]
-    GCSs_sets_dict = GCSs_parsing(GCSs_files_paths)
+    GCSs_sets_dict = GCSs_parsing(GCSs_files_paths,col_num)
     if weight ==1:
         GCSs_sets_dict = strength_normalization (GCSs_sets_dict)
     for k, v in GCSs_sets_dict.items():
@@ -104,25 +105,26 @@ def wrap_motif_construct(Source_genome_path,GCSs_files_paths, weight,path_out):
         # save the pwm
         df = pd.DataFrame(pwm)
         df.to_csv(path_out+k +'_pwm.csv')
+    print('Finish motif construction!')
     return seqs,pwm, m
 
+
 #Input: GCS input
-pwd = '/data/GCS_calling/GCS_extended_version/'
-GCSs_input={'MOXI': pwd+"MOXI.txt",'LEVO': pwd+"LEVO.txt", 'NOR': pwd+ "NOR.txt",'CIP': pwd+"CIP.txt",
-           'GEMI': pwd+"GEMI.txt"}
+pwd = '/Volumes/TJC/ChIP_project/GCS_calling_files/HF_GCS_strength_0408/TOP_strength_GCSs/'
+GCSs_input={'MOXI': pwd+"TopGCS_MOXI_sort.txt",'LEVO': pwd+"TopGCS_LEVO_sort.txt", 'NOR': pwd+ "TopGCS_NOR_sort.txt",'CIP': pwd+"TopGCS_CIP_sort.txt",
+           'GEMI': pwd+"TopGCS_GEMI_sort.txt"}
+
 #Input: path to the mapping genome FASTA.
-fasta_path_input = "/Volumes/TJC/GCS_calling_files/Mu_ori_mu_insert_MG1655.fa"
+fasta_path_input = "/Volumes/TJC/ChIP_project/GCS_calling_files/Mu_ori_mu_insert_MG1655.fa"
 
 #Output path
-Output_dir="/Volumes/TJC/GCS_calling_files/motif_construct/"
+Output_dir="/Volumes/TJC/ChIP_project/GCS_calling_files/motif_topStrength_sort/"
 if not os.path.exists(Output_dir):
     os.makedirs(Output_dir)     
-seqs,pwm, m = wrap_motif_construct(fasta_path_input,GCSs_input, 1,Output_dir)
+seqs,pwm, m = wrap_motif_construct(fasta_path_input,GCSs_input, 1,Output_dir,1)
 
 
-Output_dir="/Volumes/TJC/GCS_calling_files/motif_construct/noweight/"
+Output_dir="/Volumes/TJC/ChIP_project/GCS_calling_files/motif_topStrength_sort/noweight/"
 if not os.path.exists(Output_dir):
     os.makedirs(Output_dir)     
-seqs,pwm, m = wrap_motif_construct(fasta_path_input,GCSs_input, 0,Output_dir)
-
-
+seqs,pwm, m = wrap_motif_construct(fasta_path_input,GCSs_input, 0,Output_dir,1)
