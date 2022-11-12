@@ -77,6 +77,13 @@ generate GCS hierarchical clustering heat map
 
 **Input**: merged csv containing the cleavage strength for each replicate across 5 FQ treatment 
 
+### GCS_sort_plot.R
+
+Sort GCS based on the cleavage strengths and save the file of sites and strength for motif construction; Further, retain the top sites which are identified as real GCSs for motif construction 
+
+Also heatmap and barplots showng the  top strengths sites for each FQ treatment 
+
+Next step in pipeline for motif construction: pssm_construction.py
 
 
 ### DEseq.R
