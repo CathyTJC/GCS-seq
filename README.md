@@ -91,4 +91,16 @@ This script performs differential gene expression analysis and saves the results
 
 **Input** 1. annotation file (GCF_000005845.2_ASM584v2_genomic_insert_hierexon.gffread.gtf) 2. GCS file 3. gene expression files (raw counts)
 
+### GO_prepare_updated.R
+
+This script Add GCS annotation/ prepare for functional enrichment analysis
+
+### GO_cutoff_plot.R
+
+Ranked GCS plot based on cleavage strength
+
+### GO_enrichment_plot.R
+
+Plot GO enrichment results
+
 
