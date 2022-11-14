@@ -110,21 +110,26 @@ def wrap_motif_construct(Source_genome_path,GCSs_files_paths, weight,path_out,co
 
 
 #Input: GCS input
-pwd = '/Volumes/TJC/ChIP_project/GCS_calling_files/HF_GCS_strength_0408/TOP_strength_GCSs/'
-GCSs_input={'MOXI': pwd+"TopGCS_MOXI_sort.txt",'LEVO': pwd+"TopGCS_LEVO_sort.txt", 'NOR': pwd+ "TopGCS_NOR_sort.txt",'CIP': pwd+"TopGCS_CIP_sort.txt",
-           'GEMI': pwd+"TopGCS_GEMI_sort.txt"}
+pwd = '/Volumes/TJC/ChIP_project/GCS_calling_files/HF_GCS_strength_0408/TOP_strength_sort_hit/'
+#GCSs_input={'MOXI': pwd+"TopGCS_MOXI_sort.txt",'LEVO': pwd+"TopGCS_LEVO_sort.txt", 'NOR': pwd+ "TopGCS_NOR_sort.txt",'CIP': pwd+"TopGCS_CIP_sort.txt",
+          # 'GEMI': pwd+"TopGCS_GEMI_sort.txt"}
+
+GCSs_input={'MOXI': pwd+"MOXI_sort_hit.txt",'LEVO': pwd+"LEVO_sort_hit.txt", 'NOR': pwd+ "NOR_sort_hit.txt",'CIP': pwd+"CIP_sort_hit.txt",
+           'GEMI': pwd+"GEMI_sort_hit.txt"}
 
 #Input: path to the mapping genome FASTA.
 fasta_path_input = "/Volumes/TJC/ChIP_project/GCS_calling_files/Mu_ori_mu_insert_MG1655.fa"
 
 #Output path
-Output_dir="/Volumes/TJC/ChIP_project/GCS_calling_files/motif_topStrength_sort/"
+Output_dir="/Volumes/TJC/ChIP_project/GCS_calling_files/motif_topStrength_sort_hit/"
 if not os.path.exists(Output_dir):
     os.makedirs(Output_dir)     
 seqs,pwm, m = wrap_motif_construct(fasta_path_input,GCSs_input, 1,Output_dir,1)
 
 
-Output_dir="/Volumes/TJC/ChIP_project/GCS_calling_files/motif_topStrength_sort/noweight/"
+Output_dir="/Volumes/TJC/ChIP_project/GCS_calling_files/motif_topStrength_sort_hit/noweight/"
 if not os.path.exists(Output_dir):
     os.makedirs(Output_dir)     
 seqs,pwm, m = wrap_motif_construct(fasta_path_input,GCSs_input, 0,Output_dir,1)
+
+
