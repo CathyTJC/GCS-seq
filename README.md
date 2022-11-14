@@ -20,7 +20,8 @@ This scripts read in coverage file (processed from Galaxy, available upon reques
 This scripts is used for the identification of GCSs.
 
 **Input** the folder contains the coverage data from NGS that preprocessed with coverage_read.py
-**Output** files containing GCSs (GCS calling output is avaialbe in folder **GCS_calling**
+
+**Output** files containing GCSs (GCS calling output is avaialbe in folder **GCS_calling**)
 
 ### venn_diagram.R
 
