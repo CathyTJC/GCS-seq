@@ -1,10 +1,13 @@
 # GCS-seq
 
-GCS-seq is a ChIP-seq based approach that identifies genome-wide gyrase cleavage sites (GCSs) in *E. coli* popluation grown to staionary-phase. In this project, we performed GCS-seq with a panel of differnt fluorquinolone (FQs) antibiotics that are known to have differential killing capacity, aiming to identify the association between cleavage patterns (e.g., number, strength, location) and bacterial persister levels. 
+GCS-seq is a ChIP-seq based approach that identifies genome-wide gyrase cleavage sites (GCSs) in *E. coli* popluation grown to staionary-phase. In this project, we performed GCS-seq with a panel of differnt fluorquinolone (FQs) antibiotics that are known to have differential killing capacity, aiming to identify the association between cleavage patterns (e.g., number, cleavage strength, location) and bacterial persister levels. 
 
 This repository contains scripts that used to identify genome-wide GCSs and the downstream analysis performed related to the manuscript *Genome-wide mapping of fluoroquinolone-stabilized DNA gyrase cleavage sites displays drug specific effects that correlate with bacterial persistence* 
 
 For full project description, please refer to our manuscript (in revision and available on https://www.biorxiv.org/content/10.1101/2022.10.27.514060v1). 
+
+Raw sequencing data were deposited with GEO under accession number GSE206610.
+
 
 
 ## File Description
